@@ -1,0 +1,14 @@
+[Unit]
+Description=oom-guard: reap idle worker processes (PROC_PATTERN) to avoid OOM hangs
+Documentation=man:systemd.timer(5)
+
+[Service]
+Type=oneshot
+Nice=10
+IOSchedulingClass=idle
+# Override tunables here if you don't want the script defaults, e.g.:
+#   Environment=PROC_PATTERN=claude.exe
+#   Environment=IDLE_SECS=1800
+#   Environment=IDLE_RATE=2.0
+#   Environment=GRACE_SECS=10
+ExecStart=%h/.local/bin/oom-guard.sh

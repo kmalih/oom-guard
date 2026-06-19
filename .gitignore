@@ -1,0 +1,6 @@
+# runtime state — never commit
+*.log
+state.tsv
+.lastrun
+.state.*
+.local/
