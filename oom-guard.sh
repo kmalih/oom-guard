@@ -50,7 +50,7 @@ mem_avail_kb() { awk '/^MemAvailable:/{print $2; exit}' /proc/meminfo; }
 read_proc() { # $1=pid -> "cputicks starttime" or nothing
   local stat rest
   stat="$(cat "/proc/$1/stat" 2>/dev/null)" || return 1
-  rest="${stat#*) }"                       # everything after "pid (comm) "
+  rest="${stat##*) }"                      # everything after the LAST "pid (comm) "
   # rest fields: state(1) ... utime(12) stime(13) ... starttime(20)
   awk -v r="$rest" 'BEGIN{split(r,f," "); print f[12]+f[13], f[20]}'
 }
