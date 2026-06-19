@@ -1,5 +1,5 @@
 [Unit]
-Description=oom-guard: reap idle worker processes (PROC_PATTERN) to avoid OOM hangs
+Description=oom-guard: reap workers (PROC_PATTERN) under memory pressure to avoid OOM hangs
 Documentation=man:systemd.timer(5)
 
 [Service]
@@ -8,7 +8,9 @@ Nice=10
 IOSchedulingClass=idle
 # Override tunables here if you don't want the script defaults, e.g.:
 #   Environment=PROC_PATTERN=claude.exe
-#   Environment=IDLE_SECS=1800
-#   Environment=IDLE_RATE=2.0
+#   Environment=MEM_MIN_KB=120000
+#   Environment=MEM_TARGET_KB=200000
+#   Environment=PROTECT_ACTIVE=1
 #   Environment=GRACE_SECS=10
+#   Environment=IDLE_SECS=0      # >0 also reaps long-idle workers regardless of memory
 ExecStart=%h/.local/bin/oom-guard.sh

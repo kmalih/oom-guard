@@ -28,4 +28,4 @@ systemctl --user enable --now oom-guard.timer
 echo "oom-guard installed. Watching process: $PROC_PATTERN"
 echo "Status:  systemctl --user status oom-guard.timer"
 echo "Logs:    cat ~/.local/state/oom-guard/oom-guard.log"
-echo "Dry run: DRY_RUN=1 PROC_PATTERN=$PROC_PATTERN ~/.local/bin/oom-guard.sh"
+echo "Dry run: DRY_RUN=1 MEM_MIN_KB=999999999 PROC_PATTERN=$PROC_PATTERN ~/.local/bin/oom-guard.sh"
