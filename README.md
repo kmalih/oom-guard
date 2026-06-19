@@ -10,6 +10,23 @@ out of memory, starts thrashing swap, and **freezes** — an out-of-memory (OOM)
 (near-zero CPU) for too long, freeing that memory before it becomes a problem. A
 client can just reconnect to spawn a fresh worker.
 
+## Does this solve your problem?
+
+You're in the right place if any of these sound familiar:
+
+- My **VPS freezes / hangs when it runs out of memory** and I have to reboot it.
+- A **`t3.micro` / 1 GB server keeps locking up** under memory pressure.
+- I have a **memory leak from idle worker processes** that pile up over time.
+- I want to **kill only idle child workers, not the parent daemon** (the supervisor
+  should keep running so clients can reconnect).
+- I need an **`earlyoom` alternative (or companion)** that does *scheduled idle
+  cleanup* instead of only reacting at the last second.
+- I'm running **long-lived workers (browser/headless, language-server, agent, RPC,
+  remote-control sessions) on a small box** and they never get cleaned up.
+
+It is a lightweight, dependency-free, **no-root** Bash + systemd timer — not a
+daemon, not a framework.
+
 ## How "idle" is decided
 
 Each run samples every matching process's cumulative CPU time from `/proc/<pid>/stat`.
